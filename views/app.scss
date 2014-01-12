@@ -1,0 +1,363 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+@mixin frame {
+  border: #666 2px solid;
+  border-radius: 4px;
+}
+.clearfix {
+  zoom:1;
+  &:before, &:after {
+    content: "\0020";
+    display: block;
+    height: 0;
+    overflow: hidden;
+  }
+  &:after {
+    clear: both;
+  }
+}
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-oveflow: ellipsis;
+}
+@mixin button {
+  display: inline-block;
+  position: relative;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, .5);
+  border-radius: 4px;
+  color: #eee;
+  line-height: 52px;
+  text-align: center;
+  text-decoration: none;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, .3);
+  outline: none;
+  -webkit-transition: none;
+  transition: none;
+  &:hover {
+    background-color: rgba(255, 255, 255, .1);
+  }
+  &:active {
+    top: 3px;
+    box-shadow: none;
+  }
+  &:before, &:after {
+    position: absolute;
+    z-index: -1;
+    display: block;
+    content: '';
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-transition: all .3s;
+    transition: all .3s;
+  }
+}
+.grayscale {
+  -webkit-filter: grayscale(80%);
+  /*
+  filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale");
+  filter: gray;
+  */
+}
+
+html, body {
+  height: 100%;
+}
+body {
+  position: relative;
+  min-width: 960px;
+  background-color: #000;
+  font-size: 15px;
+}
+::-webkit-input-placeholder {
+    color:    #444;
+}
+:-moz-placeholder {
+    color:    #444;
+}
+.modal {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  z-index: 99;
+  background-color: rgba(0, 0, 0, .8);
+}
+.header {
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  height: 64px;
+  z-index: 9;
+  .title {
+    height: 64px;
+    padding-left: 16px;
+    color: #fff;
+    font-size: 32px;
+    font-family: Consolas;
+    font-weight: bold;
+    line-height: 64px;
+  }
+}
+.main {
+  position: relative;
+  min-width: 960px;
+  height: 100%;
+  margin: 0 auto;
+  background-color: #333;
+  color: #ccc;
+  font-size: 100%;
+  font-family: Meiryo;
+  .left {
+    position: absolute;
+    left: 0px;
+    right: 320px;
+    top: 64px;
+    bottom: 0px;
+    .code {
+      position: relative;
+      height: 100%;
+      overflow: hidden;
+      @include frame;
+      .wrap {
+        height: 100%;
+        .num {
+          position: absolute;
+          left: 0px;
+          top: 0px;
+          bottom: 0px;
+          width: 4.15em;
+          z-index: 2;
+          background-color: #000;
+          opacity: 0.5;
+        }
+        .input {
+          width: 100%;
+          height: 100%;
+          max-width: 100%;
+          max-height: 100%;
+          min-width: 100%;
+          min-height: 100%;
+          padding: 16px 16px 16px 5em;
+          border: none;
+          background-color: #222;
+          color: #fff;
+          font-size: 90%;
+          font-family: Menlo, "Bitstream Vera Sans Mono", "DejaVu Sans Mono", Monaco, Consolas, monospace;
+          line-height: 1.7;
+          resize: none;
+        }
+        .preview {
+          width: 100%;
+          height: 100%;
+          padding: 16px 16px 16px 5em;
+          overflow-y: scroll;
+          background-color: #222;
+          border: none;
+          color: #fff;
+          font-size: 90%;
+          line-height: 1.7;
+          word-wrap: break-word;
+        }
+      }
+      .label {
+        position: absolute;
+        right: 0px;
+        top: 0px;
+        height: 40px;
+        font-size: 16px;
+        .off {
+          margin-right: -14px;
+          margin-top: -14px;
+          padding: 16px 16px 4px 4px;
+          background-color: #666;
+          border-radius: 4px;
+          .button {
+            display: inline-block;
+            height: 32px;
+            padding: 0 8px;
+            line-height: 32px;
+            color: #eee;
+          }
+        }
+        .on {
+          @extend .clearfix;
+          margin-right: -14px;
+          margin-top: -14px;
+          padding: 16px 16px 4px 4px;
+          border-radius: 4px;
+          .image {
+            float: left;
+            width: 32px;
+            height: 32px;
+            margin-right: -32px;
+            border-radius: 3px;
+          }
+          .name {
+            display: inline-block;
+            float: left;
+            height: 32px;
+            padding-left: 40px;
+            padding-right: 8px;
+            line-height: 32px;
+            color: #fff;
+            text-shadow: rgba(0, 0, 0, 0.8) 1px 1px 1px;
+          }
+        }
+      }
+    }
+  }
+  .right{
+    position: absolute;
+    right: 0px;
+    top: 64px;
+    bottom: 0px;
+    width: 320px;
+    .chat {
+      position: absolute;
+      left: 8px;
+      right: 8px;
+      top: 0px;
+      bottom: 8px;
+      .me {
+        position: relative;
+        @extend .clearfix;
+        .image {
+          float: left;
+          width: 64px;
+          height: 64px;
+          @include frame;
+        }
+        .wrap {
+          float: left;
+          margin-left: 8px;
+          .name {
+            @extend .ellipsis;
+            width: 232px;
+            height: 64px;
+            padding-left: 8px;
+            color: #fff;
+            font-size: 24px;
+            font-weight: bold;
+            line-height: 64px;
+          }
+        }
+        .config {
+            @extend .clearfix;
+            position: absolute;
+            right: 8px;
+            top: 0px;
+          .font {
+            float: left;
+            width: 20px;
+            height: 20px;
+            margin-left: 4px;
+            cursor: pointer;
+            color: #eee;
+            font-size: 20px;
+          }
+        }
+      }
+      .input {
+        width: 100%;
+        height: 64px;
+        max-width: 100%;
+        max-height: 64px;
+        min-width: 100%;
+        min-height: 64px;
+        margin-top: 8px;
+        padding: 8px;
+        @include frame;
+        background-color: #222;
+        box-shadow: inset 2px 2px 5px rgba(0, 0, 0, .5);
+        color: #fff;
+        font-size: 100%;
+        font-family: Meiryo;
+        resize: none;
+      }
+      .messages {
+        position: absolute;
+        left: 0px;
+        right: 0px;
+        top: 136px;
+        bottom: 0px;
+        margin-top: 16px;
+        overflow-y: scroll;
+        .item {
+          @extend .clearfix;
+          margin-bottom: 8px;
+          .image {
+            float: left;
+            width: 32px;
+            height: 32px;
+            margin-right: -32px;
+            @include frame;
+          }
+          .wrap {
+            float: left;
+            width: 100%;
+            .message {
+              margin-left: 40px;
+              padding-top: 8px;
+              font-size: 100%;
+              line-height: 1.7;
+              word-wrap: break-word;
+              .posted {
+                margin-left: 4px;
+                color: #aaa;
+                font-size: 65%;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+.font-window {
+  display: none;
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  z-index: 98;
+  background-color: rgba(0, 0, 0, .5);
+  .inner {
+    width: 480px;
+    margin: 32px auto 0 auto;
+    padding: 32px;
+    background-color: #444;
+    border-radius: 4px;
+    .text {
+      height: 32px;
+      color: #eee;
+      font-size: 16px;
+      .preview {
+        font-size: 15px;
+      }
+    }
+    .input {
+      width: 100%;
+      height: 32px;
+    }
+    .close {
+      @include button;
+      display: block;
+      width: 128px;
+      margin: 16px auto 0 auto;
+      border-radius: 4px;
+      background-color: #333;
+      color: #eee;
+      font-size: 15px;
+    }
+  }
+}

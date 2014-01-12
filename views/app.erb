@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>1keyboard - Online co-op programming</title>
+  <link rel="stylesheet" href="<%= APP_URL %>app.css">
+  <link rel="stylesheet" href="<%= APP_URL %>gcp/prettify.css">
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+  <link rel="stylesheet" href="<%= APP_URL %>jquery.powertip.min.css">
+</head>
+<body style="font-size: <%= @user.fontsize %>px">
+  <div class="modal" id="modal"></div>
+  <div class="header">
+    <div class="title">1keyboard</div>
+  </div>
+  <div class="main">
+    <div class="left">
+      <div class="code" id="code_frame">
+        <div class="wrap">
+          <div class="num"></div>
+          <textarea style="display: none;" class="input" id="code_input" wrap="hard"><%= @code %></textarea>
+          <pre class="preview prettyprint linenums" id="code_preview"><%= @code %></pre>
+        </div>
+        <div class="label">
+          <div style="display: none;" class="on" id="label_on">
+            <img class="image" id="label_on_image" src="">
+            <div class="name" id="label_on_name">あなたが編集中...</div>
+          </div>
+          <div style="display: none;" class="off" id="label_off">
+            <a href="#"><div class="button">コードを編集する</div></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="right">
+      <div class="chat">
+        <div class="me">
+          <img class="image message-image" id="user_image" src="">
+          <div class="wrap">
+            <div class="name" id="user_name"></div>
+          </div>
+          <div class="config">
+            <div class="font" id="open_fontsize"><i class="fa fa-font"></i></div>
+          </div>
+        </div>
+        <textarea class="input" id="chat_input" placeholder="Chat..."></textarea>
+        <div class="messages" id="chat_log">
+          <% @messages.each do |row| %>
+            <div class="item">
+              <img class="image" src="<%= row['image_url'] %>" title="<%= row['name'] %>" style="border: <%= row['color'] %> 2px solid">
+              <div class="wrap">
+                <div class="message">
+                  <span><%= row['message'] %></span>
+                  <span class="posted"><%= row['time'] %></span>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="font-window" id="font_window">
+    <div class="inner">
+      <div class="text">フォントサイズの変更 : <span class="preview" id="fontsize_preview"><%= @user.fontsize %>px</span></div>
+      <input class="input" id="fontsize" type="range" min="6" max="32" value="15">
+      <a class="close" id="close_fontsize" href="#">閉じる</a>
+    </div>
+  </div>
+
+  <span id="_trip" style="display: none;"><%= @trip %></span>
+  <span id="_channel" style="display: none;"><%= @channel %></span>
+  <span id="_fontsize" style="display: none;"><%= @user.fontsize %></span>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+  <script src="<%= rocketio_js %>"></script>
+  <script src="<%= APP_URL %>gcp/prettify.js"></script>
+  <script src="<%= APP_URL %>jquery.powertip.min.js"></script>
+  <script src="<%= APP_URL %>app.js"></script>
+</body>
+</html>
