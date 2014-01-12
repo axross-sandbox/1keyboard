@@ -3,7 +3,7 @@
 require 'sqlite3'
 
 =begin
-- central.sqlite3
+- master.sqlite3
   - users
     - id INTEGER
     - name TEXT
@@ -19,8 +19,7 @@ require 'sqlite3'
     - hash TEXT
   - codes
     - id INTEGER
-    - name TEXT
-    - user_id INTEGER
+    - code TEXT
     - created INTEGER
   - chats
     - id INTEGER
@@ -35,12 +34,12 @@ def sqlite(dbname)
   db.close
 end
 
-if File.exist? 'central.sqlite3'
-  File.delete 'central.sqlite3'
-  puts '  # central.sqlite3が既に存在したので削除しました'
+if File.exist? 'master.sqlite3'
+  File.delete 'master.sqlite3'
+  puts '  # master.sqlite3が既に存在したので削除しました'
 end
 
-sqlite 'central' do |db|
+sqlite 'master' do |db|
   db.execute(<<-SQL
     CREATE TABLE users (
       id INTEGER UNIQUE NOT NULL,
