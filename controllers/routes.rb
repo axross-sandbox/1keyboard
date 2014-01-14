@@ -49,20 +49,3 @@ get '/channel/:ch_name' do
     'セッションがねーよ'
   end
 end
-
-=begin
-get '/test' do
-  user = User.init(4289883)
-  p user
-
-  trip = User.encrypt(4289883)
-  p trip
-
-  id = User.decrypt('40a830492dc7f61da6d2ee9fd3c6032f')
-  p id
-
-  channel = Channel.init(1)
-  p channel
-  channel.post_message(4289883, 'Hello world!')
-end
-=end

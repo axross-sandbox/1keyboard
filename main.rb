@@ -7,11 +7,9 @@ require 'sass'
 require_relative 'settings.rb'
 
 set sessions: true
-set logging: true
 set server: :thin
 set port: APP_PORT
 set public_folder: File.dirname(__FILE__) + '/views'
-set views: File.dirname(__FILE__) + '/views'
 
 Dir.foreach 'models/' do |filename|
   if File.extname(filename) == '.rb'

@@ -1,5 +1,5 @@
 if production?
-  APP_URL = 'http://1keyboard.net/'
+  APP_URL = 'http://lab.axross.org:4567/'
   APP_PORT = 80
   GITHUB_APP_ID = ''
   GITHUB_APP_SECRET = ''
